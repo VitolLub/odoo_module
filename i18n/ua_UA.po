@@ -1,0 +1,123 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* custom_module
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0-20230430\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-07 14:37+0000\n"
+"PO-Revision-Date: 2023-06-07 14:37+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: custom_module
+#: model:ir.model.fields.selection,name:custom_module.selection__res_config_settings__radio_field__true
+msgid "Asynchronous"
+msgstr "Асинхронний"
+
+#. module: custom_module
+#: model:ir.model.fields,field_description:custom_module.field_custom_module__avatar
+msgid "Avatar"
+msgstr "Аватар"
+
+#. module: custom_module
+#: model:ir.model,name:custom_module.model_res_config_settings
+msgid "Config Settings"
+msgstr "Параметри конфігурації"
+
+#. module: custom_module
+#: model:ir.ui.menu,name:custom_module.custom_sub_menu_configuartion
+msgid "Configuration"
+msgstr "Конфігурація"
+
+#. module: custom_module
+#: model:ir.model.fields,field_description:custom_module.field_custom_module__create_uid
+msgid "Created by"
+msgstr "Створений"
+
+#. module: custom_module
+#: model:ir.model.fields,field_description:custom_module.field_custom_module__create_date
+msgid "Created on"
+msgstr "Створено на"
+
+#. module: custom_module
+#: model:ir.actions.act_window,name:custom_module.action_custom_module
+#: model:ir.ui.menu,name:custom_module.custom_sub_menu
+#: model_terms:ir.ui.view,arch_db:custom_module.res_config_settings_view_form
+msgid "Custom Module"
+msgstr "Спеціальний модуль"
+
+#. module: custom_module
+#: model:ir.ui.menu,name:custom_module.custom_root_menu
+msgid "Custom Module Menu"
+msgstr "Меню спеціального модуля"
+
+#. module: custom_module
+#: model:ir.model.fields,field_description:custom_module.field_custom_module__display_name
+msgid "Display Name"
+msgstr "Відображуване ім'я"
+
+#. module: custom_module
+#: model:ir.model.fields,field_description:custom_module.field_custom_module__email
+#: model_terms:ir.ui.view,arch_db:custom_module.custom_module_form_view
+msgid "Email"
+msgstr "Email"
+
+#. module: custom_module
+#: model:ir.model.fields,field_description:custom_module.field_custom_module__id
+msgid "ID"
+msgstr "ID"
+
+#. module: custom_module
+#: model:ir.model.fields,field_description:custom_module.field_custom_module____last_update
+msgid "Last Modified on"
+msgstr "Востаннє змінено"
+
+#. module: custom_module
+#: model:ir.model.fields,field_description:custom_module.field_custom_module__write_uid
+msgid "Last Updated by"
+msgstr "Востаннє оновлено"
+
+#. module: custom_module
+#: model:ir.model.fields,field_description:custom_module.field_custom_module__write_date
+msgid "Last Updated on"
+msgstr "Востаннє оновлено"
+
+#. module: custom_module
+#: model:ir.model.fields,field_description:custom_module.field_custom_module__name
+#: model_terms:ir.ui.view,arch_db:custom_module.custom_module_form_view
+msgid "Name"
+msgstr "Ім'я"
+
+#. module: custom_module
+#: model:ir.model.fields.selection,name:custom_module.selection__res_config_settings__radio_field__false
+msgid "No Asynchronous"
+msgstr "Не асинхронно"
+
+#. module: custom_module
+#: model:ir.model.fields,field_description:custom_module.field_custom_module__phone
+#: model_terms:ir.ui.view,arch_db:custom_module.custom_module_form_view
+msgid "Phone"
+msgstr "Телефон"
+
+#. module: custom_module
+#: model:ir.model.fields,field_description:custom_module.field_res_config_settings__radio_field
+#: model_terms:ir.ui.view,arch_db:custom_module.res_config_settings_view_form
+msgid "Radio Field"
+msgstr "Радіо Поле"
+
+#. module: custom_module
+#: model:ir.actions.act_window,name:custom_module.custom_module_config_settings
+#: model:ir.ui.menu,name:custom_module.custom_sub_menu_settings
+msgid "Settings"
+msgstr "Налаштування"
+
+#. module: custom_module
+#: model:ir.model,name:custom_module.model_custom_module
+msgid "custom.module"
+msgstr ""

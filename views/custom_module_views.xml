@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <!-- Sub Menu 1: Custom Module List -->
+    <record id="custom_module_list_view" model="ir.ui.view">
+        <field name="name">custom_module.list.view</field>
+        <field name="model">custom.module</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="avatar" widget="image" options='{"resize_image": true, "image_size": [40, 40]}'/>
+                <field name="name"/>
+                <field name="email"/>
+                <field name="phone"/>
+                <field name="group_id"/>
+            </tree>
+        </field>
+    </record>
+    <!-- Sub Menu 1: Custom Module List End-->
+
+    <!-- Sub Menu 1: Custom Module Form -->
+    <record id="custom_module_form_view" model="ir.ui.view">
+        <field name="name">custom_module.form.view</field>
+        <field name="model">custom.module</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="avatar" widget="image" options='{"resize_image": true, "image_size": [60, 60]}' />
+                        <field name="name" string="Name" />
+                        <field name="email" string="Email" />
+                        <field name="phone" string="Phone" />
+                        <field name="group_id" string="Group" />
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+    <!-- Sub Menu 1: Custom Module Form End -->
+
+    <record id="action_custom_module" model="ir.actions.act_window">
+        <field name="name">Custom Module</field>
+        <field name="res_model">custom.module</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="custom_root_menu" name="Custom Module Menu"  action="action_custom_module"/>
+
+</odoo>

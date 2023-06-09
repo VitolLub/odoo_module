@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <!-- Sub Menu 1: Custom Module Settings -->
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">custom.module.settings.view.form</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" data-string="Custom Module" string="Custom Module" data-key="custom_module">
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12">
+                            <div class="o_setting_left_pane">
+                                <div class="o_setting_group">
+                                    <div class="o_setting_left_pane">
+                                        <field name="radio_field" string="Radio Field" widget="radio"  />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+    <!-- Sub Menu 1: Custom Module Settings End -->
+
+    <record id="custom_module_config_settings" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_id" ref="res_config_settings_view_form" />
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module':'custom_module'}</field>
+    </record>
+
+    <menuitem id="custom_sub_menu_configuartion" name="Configuration" parent="custom_root_menu" />
+    <menuitem id="custom_sub_menu_settings" name="Settings" parent="custom_sub_menu_configuartion" action="custom_module_config_settings"/>
+
+</odoo>

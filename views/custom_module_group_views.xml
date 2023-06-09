@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <!-- Sub Menu 1: Custom Module List -->
+    <record id="custom_module_group_list_view" model="ir.ui.view">
+        <field name="name">custom_module.group.list.view</field>
+        <field name="model">custom.module.group</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+    <!-- Sub Menu 1: Custom Module List End-->
+
+    <!-- Sub Menu 1: Custom Module Form -->
+    <record id="custom_module_group_form_view" model="ir.ui.view">
+        <field name="name">custom_module.group.form.view</field>
+        <field name="model">custom.module.group</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="name" string="Name" />
+                        <field name="description" string="Description" />
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+    <!-- Sub Menu 1: Custom Module Form End -->
+
+    <record id="action_custom_module_group" model="ir.actions.act_window">
+        <field name="name">Groups</field>
+        <field name="res_model">custom.module.group</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="custom_sub_menu_groups" name="Custom Module Group" parent="custom_root_menu" action="action_custom_module_group"/>
+</odoo>
