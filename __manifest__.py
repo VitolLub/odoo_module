@@ -9,6 +9,7 @@
         'views/custom_module_views.xml',
         'views/custom_module_group_views.xml',
         'views/settings_views.xml',
+        'data/cron_data.xml',
     ],
     'installable': True,
     'auto_install': False,
