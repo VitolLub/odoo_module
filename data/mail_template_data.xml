@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="mail_template_custom_module" model="mail.template">
+        <field name="name">Custom Module Qt Send</field>
+        <field name="email_from">{{ user.email_formatted }}</field>
+        <field name="email_to">vitollubomir@gmail.com</field>
+        <field name="subject">Email Notification</field>
+        <field name="description">Sent to customers with their invoices in attachment</field>
+        <field name="body_html" type="html">
+            <p>Hi</p>
+            <p>You sell <strong>${custom_variable}</strong>  orders for last period</p>
+        </field>
+    </record>
+
+</odoo>
