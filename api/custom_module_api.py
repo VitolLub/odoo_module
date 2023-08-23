@@ -23,7 +23,7 @@ class CustomModuleAPI(http.Controller):
 
         try:
             # get radio_field from settings and check if it is set to 'True' or 'False'
-            get_param = request.env['ir.config_parameter'].sudo().get_param
+            get_param = http.request.env['ir.config_parameter'].sudo().get_param
             radio_field_status = get_param('custom_module.radio_field_status')
 
             if bool(radio_field_status) == False:
@@ -31,7 +31,7 @@ class CustomModuleAPI(http.Controller):
 
             if bool(radio_field_status) == True:
                 # Model initialization
-                custom_module_model = request.env['custom.module'].delayable()
+                custom_module_model = http.request.env['custom.module'].delayable()
 
                 # Create the records
                 custom_module_model.create(data)
