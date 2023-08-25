@@ -9,6 +9,7 @@
         <field name="arch" type="xml">
             <xpath expr="//div[@name='product_lst_price']" position="inside">
                 <br/>
+                <label for="expected_delivery" string="Expected Delivery" class="oe_form_label">Expected Delivery: </label>
                 <field name="expected_delivery" id="expected_delivery"/>
                 <br/>
             </xpath>
