@@ -12,6 +12,7 @@
         'data/cron_data.xml',
         'data/mail_template_data.xml',
         'views/custom_module_product_grid_view.xml',
+        'views/custom_module_product_grid_filtering_view.xml',
     ],
     'installable': True,
     'auto_install': False,

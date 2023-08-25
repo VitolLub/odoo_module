@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <odoo>
-    <!-- Sub Menu 1: Custom Record -->
+    <!-- Display Expected Delivery on Product Grid -->
     <record id="view_product_grid_form_inherit" model="ir.ui.view">
         <field name="name">custom.product.template.kanban</field>
         <field name="model">product.template</field>
