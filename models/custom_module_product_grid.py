@@ -6,6 +6,12 @@ class CustomModuleProductGrid(models.Model):
     _inherit = 'product.template'
 
 
+
+    # @api.onchange('expected_delivery')
+    # def onchange_expected_delivery(self):
+    #     # get new date from
+
+
     def _compute_expected_delivery(self):
         # date_planned
         # for product in self:
@@ -38,21 +44,22 @@ class CustomModuleProductGrid(models.Model):
         for product in self:
             full_product_name = product.default_code + " " + product.name if product.default_code else product.name
             if product.default_code != False:
-                matching_orders = self.env['purchase.order.line'].search([
-                    ('product_id.default_code', '=', product.default_code),
-                    #('order_id.state', 'in', ['purchase', 'done']),  # Filter only completed or ongoing orders
-                ])
+                matching_orders = self._search_expected_delivery('default_code', product.default_code)
             else:
-                matching_orders = self.env['purchase.order.line'].search([
-                    ('product_id.name', '=', product.name),
-                    #('order_id.state', 'in', ['purchase', 'done']),  # Filter only completed or ongoing orders
-                ])
+                matching_orders = self._search_expected_delivery('name', product.name)
 
             expected_delivery_dates = matching_orders.mapped('order_id.date_planned')
             if expected_delivery_dates:
                 product.expected_delivery = max(expected_delivery_dates)
             else:
                 product.expected_delivery = False
+
+    def _search_expected_delivery(self, key = None, value= None):
+        matching_orders = self.env['purchase.order.line'].search([
+            ('product_id.'+str(key), '=', value),
+            # ('order_id.state', 'in', ['purchase', 'done']),  # Filter only completed or ongoing orders
+        ])
+        return matching_orders
 
     expected_delivery = fields.Char(
         string='Expected Delivery',
