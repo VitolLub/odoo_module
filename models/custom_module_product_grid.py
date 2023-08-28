@@ -26,23 +26,22 @@ class CustomModuleProductGrid(models.Model):
         readonly=True,
         store=True)
 
-    # purchase_order_lines = fields.Many2one(
-    #     "purchase.order",
-    #     string="Purchase Order Lines",
-    # )
 
     purchase_order_lines = fields.Many2one(
         'purchase.order',
         string='Purchase Order Lines'
     )
 
+    '''
+    update purchase_order 
+    date_planned field
+    '''
     @api.onchange('purchase_order_lines')
     def _onchange_purchase_order_lines(self):
-        self._logger.info('onchange_product_id3')
         for product in self:
             # Update the expected_delivery based on the related purchase order lines
             product.expected_delivery = product.purchase_order_lines.order_id.date_planned
-        self._logger.info('onchange_product_id4')
+
     @api.depends('purchase_order_lines.date_planned')
     def _compute_expected_delivery(self):
         for product in self:
@@ -52,13 +51,15 @@ class CustomModuleProductGrid(models.Model):
             else:
                 matching_orders = self._search_expected_delivery('name', product.name)
 
-
             expected_delivery_dates = matching_orders.mapped('order_id.date_planned')
             if expected_delivery_dates:
                 product.expected_delivery = max(expected_delivery_dates)
             else:
                 product.expected_delivery = False
 
+    '''
+    Seacrh purchase order by default code and name
+    '''
     def _search_expected_delivery(self, key = None, value= None):
         matching_orders = self.env['purchase.order.line'].search([
             ('product_id.'+str(key), '=', value),
