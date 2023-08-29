@@ -48,12 +48,15 @@ class CustomModuleProductGrid(models.Model):
 
             if product.default_code != False:
                 matching_orders = self._search_expected_delivery('default_code', product.default_code)
-            else:
-                matching_orders = self._search_expected_delivery('name', product.name)
+            # else:
+            #     matching_orders = self._search_expected_delivery('name', product.name)
 
-            expected_delivery_dates = matching_orders.mapped('order_id.date_planned')
+            # get date_deadline
+
+            # expected_delivery_dates = matching_orders.mapped('date_planned')
+            expected_delivery_dates = True
             if expected_delivery_dates:
-                product.expected_delivery = max(expected_delivery_dates)
+                product.expected_delivery = '' #max(expected_delivery_dates)
             else:
                 product.expected_delivery = False
 
@@ -61,10 +64,11 @@ class CustomModuleProductGrid(models.Model):
     Seacrh purchase order by default code and name
     '''
     def _search_expected_delivery(self, key = None, value= None):
-        matching_orders = self.env['purchase.order.line'].search([
-            ('product_id.'+str(key), '=', value),
+        matching_orders = self.env['stock.move.line'].search([
+                ('product_id.'+str(key), '=', value),
             # ('order_id.state', 'in', ['purchase', 'done']),  # Filter only completed or ongoing orders
         ])
+        self._logger.info(f'matching_orders {matching_orders}')
         return matching_orders
 
 
