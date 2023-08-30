@@ -3,7 +3,7 @@ import requests
 import base64
 import logging
 import sys
-from google_images_search import GoogleImagesSearch
+# from google_images_search import GoogleImagesSearch
 import random
 
 class CustomModule(models.Model):
@@ -60,8 +60,8 @@ class CustomModule(models.Model):
 
     def _find_google_avatars(self):
 
-        gis = GoogleImagesSearch('AIzaSyDzUeGQOCPQXxozKtZIe54Ph0QLnpaCjn0',
-                                 '636c5584cb3734ad1')
+        # gis = GoogleImagesSearch('AIzaSyDzUeGQOCPQXxozKtZIe54Ph0QLnpaCjn0',
+        #                          '636c5584cb3734ad1')
 
         # Set the search parameters
         search_params = ['simple avatar', 'single avatar', 'simple single avatar', 'simple avatar icon',
@@ -75,13 +75,13 @@ class CustomModule(models.Model):
         }
 
         # Perform the search
-        gis.search(params_for_search)
+        # gis.search(params_for_search)
 
         # Retrieve the image URLs
         url = ''
-        for image in gis.results():
-            url = image.url
-            break
+        # for image in gis.results():
+        #     url = image.url
+        #     break
 
         return url
 
