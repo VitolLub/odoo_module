@@ -4,47 +4,60 @@ from datetime import datetime, timedelta
 import datetime
 from functools import reduce
 
+
 class StockPickingInherited(models.Model):
+    _logger = logging.getLogger(__name__)
     _inherit = 'stock.picking'
 
     @api.onchange('scheduled_date')
     def _onchange_scheduled_date(self):
+        self._logger.info(f"_onchange_scheduled_date123")
         for picking in self:
+            self._logger.info(f"_onchange_scheduled_date {picking}")
             if picking.scheduled_date:
-                # Your custom logic when scheduled_date changes
-                # Example: Update another field or perform specific actions
-                picking.custom_field = f"Scheduled date changed to {picking.scheduled_date}"
+                self._logger.info(f"_onchange_scheduled_date {picking.scheduled_date}")
+                for move_line in picking.move_line_ids:
+                    self._logger.info(f"_onchange_scheduled_date {move_line}")
+                    product = move_line.product_id.product_tmpl_id
+                    self._logger.info(f"_onchange_scheduled_date {product}")
+                    self._logger.info(f"OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
+                    product._compute_expected_delivery(picking.scheduled_date)
 
 class CustomModuleProductGrid(models.Model):
     _logger = logging.getLogger(__name__)
     _inherit = 'product.template'
+    scheduled_date = fields.Many2one('stock.picking', string="stock.picking", required=True)
+
 
     expected_delivery = fields.Char(
         string='Expected Delivery',
         compute='_compute_expected_delivery',
         readonly=True,
         store=True)
-    stock_picking = fields.Many2one(comodel_name='stock.picking',
-                                    string="journal",
-                                    required=True
-                                    )
+
 
     @api.onchange('scheduled_date')
     def _onchange_scheduled_date(self):
-        for picking in self:
-            if picking.scheduled_date:
-                # Your custom logic when scheduled_date changes
-                # Example: Update another field or perform specific actions
-                picking.custom_field = f"Scheduled date changed to {picking.scheduled_date}"
+        self._logger.info(f"_onchange_scheduled_date")
+        self._logger.info(f"Value {self.scheduled_date}")
+
 
     '''
     update purchase_order 
     date_planned field
     '''
-    @api.depends('stock_picking')
-    def _compute_expected_delivery(self):
+
+    @api.onchange('scheduled_date')
+    @api.depends('scheduled_date')
+    def _compute_expected_delivery(self,scheduled_date_on_change=None):
+        # super(CustomModuleProductGrid, self).update({
+        #     'expected_delivery': 'test',
+        # })
         for product in self:
             if product.default_code != False:
+                # super().update({
+                #     'expected_delivery': self._search_expected_delivery(),
+                # })
                 matching_orders = self._search_expected_delivery('default_code', product.default_code)
 
 
@@ -64,6 +77,11 @@ class CustomModuleProductGrid(models.Model):
                 self._logger.info(f"matching_orders {matching_orders.mapped('state')}")
                 self._logger.info(f"matching_orders {matching_orders.mapped('qty_done')}")
                 self._logger.info(f"matching_orders {matching_orders.mapped('result_package_id')}")
+                try:
+                    self._logger.info(f"scheduled_date_origin {product.scheduled_date}")
+                    self._logger.info(f"scheduled_date_origin {product.expected_delivery}")
+                except:
+                    pass
                 self._logger.info(f'+++++++++++++++++++++++++++++')
 
                 scheduled_date = matching_orders.mapped('picking_id.scheduled_date')
@@ -79,13 +97,10 @@ class CustomModuleProductGrid(models.Model):
                     # convert from [datetime.datetime(2023, 9, 2, 14, 22, 16)] to 2023-09-02 14:22:16
                     formatted_dates = scheduled_date.strftime("%Y-%m-%d %H:%M:%S")
                     self._logger.info(f"scheduled_date {formatted_dates}")
-
-                    product.expected_delivery = str(formatted_dates)
-            # # expected_delivery_dates = True
-            # if expected_delivery_dates:
-            # product.expected_delivery = 'test'
-            # else:
-            #     product.expected_delivery = False
+                    if product.expected_delivery == False:
+                        product.expected_delivery = str(formatted_dates)
+                    elif scheduled_date != None:
+                        product.expected_delivery = scheduled_date_on_change
 
     '''
     Seacrh purchase order by default code and name
@@ -99,7 +114,6 @@ class CustomModuleProductGrid(models.Model):
         self._logger.info(f'matching_orders {matching_orders}')
         self._logger.info(f'+==============================+')
         return matching_orders
-
 
 
 
