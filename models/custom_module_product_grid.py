@@ -4,6 +4,15 @@ from datetime import datetime, timedelta
 import datetime
 from functools import reduce
 
+class DatePlannedNotReadOnly(models.Model):
+    _inherit = 'purchase.order'
+
+    date_planned = fields.Datetime(string='Scheduled Date', required=True, copy=False, readonly=False)
+
+    def write(self, vals):
+        # Override the write method to customize the behavior when writing to date_planned
+        # You can add custom logic here if needed
+        return super(DatePlannedNotReadOnly, self).write(vals)
 
 class StockPickingInherited(models.Model):
     _logger = logging.getLogger(__name__)
@@ -109,7 +118,7 @@ class CustomModuleProductGrid(models.Model):
         self._logger.info(f'matching_orders {key} and {value}')
         matching_orders = self.env['stock.move.line'].search([
                 ('product_id.'+str(key), '=', value),
-            ('state', 'in', ['incoming','assigned']),  # 'purchase', 'done', Filter only completed or ongoing orders
+            # ('state', 'in', ['incoming','assigned']),  # 'purchase', 'done', Filter only completed or ongoing orders
         ])
         self._logger.info(f'matching_orders {matching_orders}')
         self._logger.info(f'+==============================+')
