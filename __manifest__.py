@@ -11,7 +11,7 @@
         # 'views/settings_views.xml',
         # 'data/cron_data.xml',
         # 'data/mail_template_data.xml',
-        'views/scheduled_date_product_grid_view.xml',
+        'views/expected_delivery_product_grid_view.xml',
         # 'views/custom_module_product_grid_sorting_view.xml',
     ],
     'installable': True,
