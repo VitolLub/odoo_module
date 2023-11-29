@@ -14,6 +14,7 @@
         # 'views/expected_delivery_product_grid_view.xml',
         'views/custom_module_product_grid_sorting_view.xml',
     ],
+   
     'installable': True,
     'auto_install': False,
     'application': True,

@@ -121,3 +121,4 @@ msgstr "Налаштування"
 #: model:ir.model,name:custom_module.model_custom_module
 msgid "custom.module"
 msgstr ""
+
